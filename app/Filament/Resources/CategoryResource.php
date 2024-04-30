@@ -2,18 +2,14 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Filament\Resources\CategoryResource\RelationManagers\ProductsRelationManager;
-use App\Models\Category;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Category;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Resource;
+use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers\ProductsRelationManager;
 
 class CategoryResource extends Resource
 {
@@ -27,12 +23,13 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
-                    ->required()
-                    ->placeholder('Category Name'),
+                    // ->columnSpanFull()
+                    ->required(),
                 Forms\Components\TextInput::make('slug')
                     ->label('Slug')
                     ->required()
-                    ->placeholder('category-slug'),
+                    ->unique('categories', 'slug')
+                    ->placeholder('category-slug')
             ]);
     }
 
