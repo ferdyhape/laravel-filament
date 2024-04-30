@@ -49,12 +49,13 @@ class ProductResource extends Resource
                     Select::make('category_id')
                         ->label('Category')
                         ->required()
+                        ->placeholder('Select Category')
                         ->options(
                             Category::all()->pluck('name', 'id')->toArray()
                         ),
                     SpatieMediaLibraryFileUpload::make('image')
                         ->label('Image')
-                        ->required()
+                        // ->required()
                         ->placeholder('Product Image')
                 ]),
             ]);
