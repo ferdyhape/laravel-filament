@@ -32,6 +32,7 @@ class Settings extends Page implements HasForms
                 TextInput::make('name')
                     ->required()->default(auth()->user()->name),
                 TextInput::make('email')->required()->default(auth()->user()->email)->email(),
+                TextInput::make('password')->required()->password(),
             ])->statePath('data');
     }
 
@@ -50,6 +51,7 @@ class Settings extends Page implements HasForms
             $user = User::find(auth()->user()->id);
             $user->name = $data['name'];
             $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
             $user->save();
         } catch (\Exception $e) {
             $this->addError('name', 'Something went wrong');
