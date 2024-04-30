@@ -66,7 +66,8 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label(''),
+                Tables\Actions\DeleteAction::make()->requiresConfirmation()->label('')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
